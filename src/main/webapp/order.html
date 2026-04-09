@@ -2,19 +2,164 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>外卖平台 - 首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外卖订单系统</title>
+    <style>
+        :root {
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --accent: #ff5722;
+            --muted: #607d8b;
+            --border: #cfd8dc;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: #37474f;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px var(--shadow);
+        }
+
+        h1, h2 {
+            color: #263238;
+            margin-bottom: 20px;
+        }
+
+        .links {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        form {
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        form .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        form .col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e64a19;
+        }
+
+        .order-list {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 600px) {
+            form .row {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>欢迎来外卖平台</h1>
+    <div class="container">
+        <h1>外卖订单系统</h1>
 
-<h2>新增订单</h2>
+        <div class="links">
+            <a href="/menu">查看菜单</a>
+        </div>
 
-<form action="/order" method="post">
-    用户: <input name="customer"><br>
-    食物: <input name="food"><br>
-    数量: <input name="quantity"><br>
-    <input type="submit">
-</form>
+        <form action="/order" method="post">
+            <h2>创建订单</h2>
+            <div class="row">
+                <div class="col">
+                    <label for="customer">顾客姓名</label>
+                    <input type="text" id="customer" name="customer" required>
+                </div>
+                <div class="col">
+                    <label for="food">菜品名称</label>
+                    <input type="text" id="food" name="food" required>
+                </div>
+                <div style="width:140px">
+                    <label for="quantity">数量</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                </div>
+            </div>
+            <div style="margin-top:20px; text-align: center;">
+                <input type="submit" value="创建订单">
+            </div>
+        </form>
 
+        <div class="order-list">
+            <h2>你的订单</h2>
+            <p class="note">点击订单编号查看详情</p>
+            <div class="order-item"><a href="/order/1001">订单 #1001</a></div>
+            <div class="order-item"><a href="/order/1002">订单 #1002</a></div>
+        </div>
+    </div>
 </body>
 </html>
